@@ -3,7 +3,7 @@ Aplicação FastAPI principal
 """
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel 
 from typing import List
 from datetime import datetime
 from src.data.schemas import Item, PedidoCreate, Pedido
@@ -71,13 +71,13 @@ def listar_pedidos():
     return pedidos
 
 
-STATUS_VALIDOS = ["PENDENTE", "PAGO", "ENVIADO", "FINALIZADO", "CANCELADO"]
+STATUS_VALIDOS = ["pendente", "pago", "enviado", "finalizado", "cancelado"]
 
 
 @app.patch("/pedidos/{id}/status", response_model=Pedido)
 def atualizar_status(id: int, status: str):
     """
-    Para atualizar status dos pedidos para "PENDENTE", "PAGO", "ENVIADO", "FINALIZADO", ou "CANCELADO" 
+    Para atualizar status dos pedidos para "pendente", "pago", "enviado", "finalizado", ou "cancelado" 
     """
     
     # Busca pedido
@@ -87,9 +87,9 @@ def atualizar_status(id: int, status: str):
         raise HTTPException(status_code=404, detail="Pedido não encontrado")
 
     if status not in STATUS_VALIDOS:
-        raise HTTPException(status_code=400, detail="Status inválido")
+        raise HTTPException(status_code=400, detail="Status inválido. Escreva: pendente, pago, enviado, finalizado, ou cancelado")
 
     pedido.status = status
-
+   
     return pedido
 
