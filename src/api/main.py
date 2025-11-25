@@ -53,7 +53,7 @@ def criar_pedido(dados: PedidoCreate):
         cliente=dados.cliente,
         itens=dados.itens,
         total=total,
-        status="PENDENTE",
+        status="pendente",
         criadoEm=datetime.now()
     )
 
